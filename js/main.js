@@ -5,7 +5,16 @@ const addPost = () => {
     fetch("https://jsonplaceholder.typicode.com/posts")
         .then(res => res.json())
         .then(data => {
-            showPost(data, counter);
+
+            if (counter - 1 == data.length) {
+                alert("No More Post");
+                counter--;
+                return;
+            }
+            else {
+                showPost(data, counter);
+            }
+            console.log(data.length)
         })
 }
 
@@ -13,18 +22,13 @@ const showPost = (postData, counter) => {
     const postsWrap = document.getElementById("postsWrap");
     postsWrap.textContent = "";
 
-
     for (let i = 0; i < counter; i++) {
-        if (counter == postData.length) {
-            break;
-        }
-
-
         const div = document.createElement("div");
         div.setAttribute("style", "margin-bottom: 10px");
 
         const h1 = document.createElement("h1");
         h1.setAttribute("style", "display: inline; color: lightgray");
+        h1.setAttribute("id", `${postData[i].id}`);
 
         const h2 = document.createElement("h4")
         h2.setAttribute("style", "display: inline; color: orange; cursor: pointer; text-transform: capitalize");
@@ -34,9 +38,6 @@ const showPost = (postData, counter) => {
 
         h2.setAttribute("data-bs-target", "#offcanvasRight");
         h2.setAttribute("data-bs-toggle", "offcanvas");
-        // h2.setAttribute("aria-controls", "offcanvasRight");
-
-        const p = document.createElement("p")
 
         h1.innerText = `${postData[i].id}. `;
         h2.innerText = postData[i].title
@@ -44,9 +45,8 @@ const showPost = (postData, counter) => {
 
         div.appendChild(h1);
         div.appendChild(h2);
-        // div.appendChild(p);
-
         postsWrap.appendChild(div);
+
     }
 }
 
@@ -93,3 +93,5 @@ const showComment = Id => {
             }
         })
 }
+
+
