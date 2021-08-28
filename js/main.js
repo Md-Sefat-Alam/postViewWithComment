@@ -27,7 +27,7 @@ const showPost = (postData, counter) => {
         h1.setAttribute("style", "display: inline; color: lightgray");
 
         const h2 = document.createElement("h4")
-        h2.setAttribute("style", "display: inline; color: orange; cursor: pointer; ");
+        h2.setAttribute("style", "display: inline; color: orange; cursor: pointer; text-transform: capitalize");
         h2.setAttribute("title", "click to show detail");
 
         h2.setAttribute("onclick", `goPostDetail(${postData[i].id})`);
